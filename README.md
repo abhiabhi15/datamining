@@ -4,6 +4,7 @@ Here are the implementation of certain data mining algorithms from scratch and a
 
 ### Clustering
 K-means
+
 Bisecting K-means
 
 ### Classification
