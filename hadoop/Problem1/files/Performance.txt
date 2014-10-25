@@ -1,0 +1,23 @@
+ ######## Map Reduce Job Begins ###########
+ ------ Mapper Job Initiated -------- 
+Mapper job done for file = : youtube.graph.small
+Mapper job done for file = : youtube.graph.medium
+Mapper job done for file = : dblp.graph.small
+Mapper job done for file = : youtube.graph.original
+Mapper job done for file = : amazon.graph.original
+Mapper job done for file = : dblp.graph.original
+Mapper job done for file = : dblp.graph.large
+Mapper job done for file = : amazon.graph.medium
+Mapper job done for file = : youtube.graph.large
+Mapper job done for file = : amazon.graph.large
+Mapper job done for file = : dblp.graph.medium
+Mapper job done for file = : amazon.graph.small
+ ------ Mapper Job Ends ------
+ For Mapper Jobs 37280000 clicks =(37.280000 seconds).
+
+ ------- Reducer Job Initiated  ------- 
+ For Reducer Jobs 21370000 clicks =(21.370000 seconds).
+
+ For Total Map-Reduce Jobs 58650000 clicks = (58.650000 seconds).
+ ######## Map Reduce Ends ##########
+

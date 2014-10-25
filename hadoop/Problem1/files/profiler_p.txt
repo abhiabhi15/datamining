@@ -1,0 +1,37 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 88.72      5.74     5.74        1     5.74     5.84  VertexDegree::reducer(char**)
+  9.74      6.37     0.63        1     0.63     0.63  VertexDegree::mapper(char**)
+  1.08      6.44     0.07  1134890     0.00     0.00  frame_dummy
+  0.46      6.47     0.03        1     0.03     0.03  std::_Rb_tree<std::string, std::pair<std::string const, int>, std::_Select1st<std::pair<std::string const, int> >, std::less<std::string>, std::allocator<std::pair<std::string const, int> > >::_M_erase(std::_Rb_tree_node<std::pair<std::string const, int> >*)
+  0.00      6.47     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN12VertexDegree6mapperEPPc
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
