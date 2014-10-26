@@ -12,7 +12,7 @@ Algorithm is implemented into three stages
 ####Code : `spla.R`
 ####R version : `3.1.0`
 ####OS : `Ubuntu 12.04 (Linux 3.2.0-58-generic)`
-#### Author : `Abhishek (Unity id : akagrawa)`
+#### Author : `Abhishek
  
 
 ## Code Description
