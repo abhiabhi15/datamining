@@ -7,6 +7,8 @@ K-means
 
 Bisecting K-means
 
+Spectral Clustering : Community Detection(SLPA)
+
 ### Classification
 
 
