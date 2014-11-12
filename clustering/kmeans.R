@@ -1,3 +1,12 @@
+# Function to calculate distance vector
+dist <- function(data, centroids){
+   distVect <- c()
+   for(i in  1:nrow(centroids)){ 
+       distVect <- append(distVect, sqrt(sum((data-centroids[i,])^2)))
+   }
+   distVect 
+}
+
 mykmeans <- function(x=NULL, k=NULL, iterations=10){
 
   if(is.null(x) || is.null(k)){
