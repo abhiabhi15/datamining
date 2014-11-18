@@ -23,8 +23,8 @@ legend("topleft", c("Cluster1", "Cluster2"), pch = list(20,18) ,col=c(1,2))
 
 #a) K-means performance measure
 # Ground Truths
-GT1 <- which(K[,ncol(data1)] == 1)
-GT2 <- which(K[,ncol(data1)] == 2)
+GT1 <- which(data1[,ncol(data1)] == 1)
+GT2 <- which(data1[,ncol(data1)] == 2)
 CL1 <- which(kc$cluster == 1)
 CL2 <- which(kc$cluster == 2)
 computePerformanceMetrics(GT1, GT2, CL1, CL2)
