@@ -1,0 +1,443 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{tabu}
+\usepackage{multirow}
+\setlength{\arrayrulewidth}{.4mm}
+\renewcommand{\arraystretch}{1.2}
+
+\begin{document}
+\setul{}{1pt}
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} l}
+\textbf{Course :} CSC591/791, Graph Data Mining \\
+\textbf{Project: } Named-Entity Recognition \\
+\textbf{Unity-ID: }  akagrawa\\
+
+\end{tabular*}
+\rule[3ex]{\textwidth}{0.5pt}
+\section{Project Description}
+ Named-Entity Recognition (NER) is a task in the information extraction pipeline that seeks to locate and classify different elements present in a text into predefined categories, such as the names of persons, organizations, locations, date, time etc. It is one of the key steps in building Semantic Webs and constructing semantically aware search engines. Typically, NER tasks are accomplished by using either rule based methods or probabilistic methods. Hidden Markov Models (HMMs) and Conditional Random Fields (CRFs) are probabilistic graphical models commonly used to build NER models. CRF models usually offer a better performance than HMMs because they can take into consideration both past and future states. These models are typically trained using supervised learning methods, i.e., trained using data with known entity tags[2].
+
+\section{Performance Evaluation}
+\textbf{DataSet1 : Wikipedia}\\
+\textbf{Model} : ner.wiki.model1.ser.gz\\
+\textbf{Parameters}: Please refer README.md file for the detail description of the  parameters tuning for training the models. The table\ref{table:1} is the performance metrics for default parameters. \\
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{LOC} & \textbf{MISC} & \textbf{ORG} & \textbf{PERS} & \textbf{TOTAL} \\ [2ex]
+\hline 
+\textbf{Precision} & 0.6336 & 0.5851 & 0.4415 & 0.8079 & 0.6874   \\ [1ex]
+\hline 
+\textbf{Balanced Accuracy} & 0.7603 & 0.6669 & 0.7651 & 0.8239 & 0.7836   \\ [1ex]
+\hline
+\textbf{Recall} & 0.5319 & 0.3437 & 0.5492 & 0.6549 & 0.6149   \\  [1ex]
+\hline
+\textbf{F1-Score} & 0.5783 & 0.4330 & 0.4895 & 0.7231 & 0.6412   \\ [1ex]
+\hline
+\textbf{True Positive Rate} & 0.5319 & 0.3437 & 0.5492 & 0.6549 & 0.6149 \\  [1ex]
+\hline
+\textbf{True Negative Rate} & 0.9827 & 0.974 & 0.9876 & 0.9856 & 0.9789   \\ [1ex]
+\hline
+\textbf{False Positive Rate} & 0.0173 & 0.0260 & 0.0123 & 0.0144 & 0.0211 \\ [1ex]
+\hline
+\textbf{False Negative Rate} & 0.468 & 0.6563 & 0.4508 & 0.3456 & 0.3851  \\ [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Dataset1: Wikipedia Test}
+\label{table:1}
+\end{table}
+\textbf{DataSet2 : Emma}\\
+\textbf{Model} : ner.emma.model1.ser.gz\\
+\textbf{Parameters}: Please refer README.md file for the detail description of the  parameters tuning for training the models. The table\ref{table:2} is the performance metrics for default parameters. \\
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{LOC} & \textbf{PERS} & \textbf{TOTAL} \\ [2ex]
+\hline 
+\textbf{Precision} & 0.8181 & 0.9210 & 0.9091 \\ [1ex]
+\hline 
+\textbf{Balanced Accuracy} & 0.7994 & 0.8959 & 0.8657 \\ [1ex]
+\hline
+\textbf{Recall} & 0.6000 & 0.7954 & 0.7977  \\  [1ex]
+\hline
+\textbf{F1-Score} & 0.6923 & 0.8537 & 0.8463 \\ [1ex]
+\hline
+\textbf{True Positive Rate} & 0.6000 & 0.7954 & 0.7977 \\  [1ex]
+\hline
+\textbf{True Negative Rate} & 0.9966 & 0.9894 & 0.9800   \\ [1ex]
+\hline
+\textbf{False Positive Rate} & 0.003 & 0.0106 & 0.0199 \\ [1ex]
+\hline
+\textbf{False Negative Rate} & 0.4 & 0.2045 & 0.2023 \\ [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Dataset2: Emma Test}
+\label{table:2}
+\end{table}
+
+\section{Questions}
+\begin{enumerate}
+\item \textbf{ For which of the labels did you obtain the best performance? Is this performance due to having more training data for that particular label?}\\
+
+\textbf{Solution} : The performance with reference to the above performance table follows the pattern below. In the training data, there are more samples of PERS than that of ORG and LOC etc. Hence having more training data for the particular label has certainly infludence the performance. \\
+    \\performance(PERS) > performance(LOC) > performance(ORG) > performance(MISC)\\
+\\\textbf{Note:} In Emma Dataset the ORG and MISC labels are not present in train and test data.     
+\item \textbf{Do the models perform better during training for the Wikipedia (Dataset 1) data or for the Emma (Dataset 2) data? Speculate why.} \\
+
+\textbf{Solution} : In order to compare the training performance of both the dataset, the performance measures on training dataset iteself is needed to be calculated. \\
+For Wikipedia (Dataset1) : The performance output on the training data:\\
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{LOC} & 0.9990 & 0.9941 & 0.9965 & 1008 & 1 & 6\\ [1ex]
+\hline 
+\textbf{MISC} & 0.9986 & 0.9930 & 0.9958 &707 & 1 & 5\\ [1ex]
+\hline
+\textbf{ORG} & 0.9955 & 0.9955 & 0.9955  & 894 & 4 & 4\\  [1ex]
+\hline
+\textbf{PERS} & 0.9989 & 0.9968 & 0.9979 &931 & 1 & 3\\ [1ex]
+\hline
+\textbf{Totals} & 0.9980 & 0.9949 & 0.9965 & 3540 & 7 & 18 \\  [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Dataset1: Wikipedia Train}
+\label{table:3}
+\end{table}
+
+For Emma (Dataset2) : The performance output on the training data:\\
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{LOC} & 1  & 1  & 1 & 14 & 0 & 0\\ [1ex]
+\hline 
+\textbf{PERS} & 1 & 1 & 1 & 98 & 0 & 0\\ [1ex]
+\hline
+\textbf{Totals}  & 1 & 1 & 1 & 112 & 0 & 0 \\  [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Dataset1: Emma Train}
+\label{table:4}
+\end{table}
+
+
+From the above performance measures, we can conclude that the model perform better during the training for the Emma(Dataset2) as compare to the training for the Wikipedia(Dataset1). The above observation can be due to the small training data size of the Emma dataset as compare to Wikipedia dataset. Also in the Emma Dataset the variability of the words were less i.e. there were very few unique words(Mr, Mrs, Emma, Taylor, London etc) which where tagged as entities as compare to Wikipedia set. \\
+
+\item \textbf{Do the models perform better during testing for the Wikipedia (Dataset 1) data or for the Emma (Dataset2) data? Speculate why.}\\
+
+\textbf{Solution} : In order to compare the test performance of both the dataset, the performance measures on test dataset is needed to be calculated. We can compare the performance measures listed in table 1 and table 2. \\
+Based on the observations, we can say that again the performance measures for Emma Dataset2 is better than that of Wikipedia Dataset1. The reasons for the observations can be analyzed as below:
+\begin{itemize}
+\item The training performance of both the datasets, the testing performance can also be extrapolated in this case.
+\item The test data sizes have a massive size difference. The testdata size of wikipedia is much more than its training data. Whereas the testdata size of emma is less than its training data. This means that the wikipedia training data might not have enough representative samples.
+\item Since the emma testdata has the almost the similar words as observed in the training data, the test accuracy is high which is comparatively less in the wikipedia dataset.\\
+\end{itemize}
+
+
+\item \textbf{“Research indicates that even state-of-the-art NER systems are brittle, meaning that NER systems developed for one domain do not typically perform well on other domains.” Is this true for your CRF models? In other words, do the models trained using Wikipedia (Dataset 1) or Emma (Dataset 2) data, work well for Twitter (Dataset 3) data?}\\
+
+\textbf{Solution:} For the performance measurements of both CRFmodels on twitter testdata, we need to compare the performance output on twitter data. The tables below lists the performance metrics.
+Using CFRmodel of Wikipedia(Dataset1) : The performance output on the twitter test data:\\
+
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{LOC} & 0.4725 & 0.3431 & 0.3975 & 129 & 144 & 247\\ [1ex]
+\hline 
+\textbf{MISC} & 0.1209 & 0.1162 & 0.1185 &51 & 371 & 388\\ [1ex]
+\hline
+\textbf{ORG} & 0.0258 & 0.0468 & 0.0333  & 8 & 302 & 163\\  [1ex]
+\hline
+\textbf{PERS} & 0.5301 & 0.2803 & 0.3667 & 141 & 125 & 362\\ [1ex]
+\hline
+\textbf{Totals} & 0.2589 & 0.2210 & 0.2384 & 329 & 942 & 1160 \\  [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Twitter Dataset using Wikipedia CRFmodel}
+\label{table:5}
+\end{table}
+
+Using CFRmodel of Emma(Dataset2) : The performance output on the twitter test data:\\
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{LOC} & 0.3480  & 0.1888  & 0.2448 & 71 & 133 & 305\\ [1ex]
+\hline 
+\textbf{PERS} & 0.1779 & 0.2147 & 0.1946 & 108 & 499 & 395\\ [1ex]
+\hline
+\textbf{Totals}  & 0.2207 & 0.1202 & 0.1557 & 179 & 632 & 1310 \\  [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Twitter Dataset using Emma CRFmodel}
+\label{table:6}
+\end{table}
+\newpage
+Based on the above observations we can say that these models have not performed better for the twitter test data. The precision and recall for individual labels is within 15-20\% in average which is very less. The CRFModel build on twitter training data must have better performance as compare to the above results.\\ 
+
+
+\item \textbf{Does the distribution of each label in the train and test data affect how well a particular label is classified?}\\
+
+\textbf{Solution:} Based on the observations of the performance measures on the train and test data, we can conclude that the label distribution has definitely an influence on the prediction accuracy and related measures.
+We see that, \\
+    \\performance(PERS) > performance(LOC) > performance(ORG) > performance(MISC)\\
+
+And number of labels also follows somewhat the same pattern,
+\\count(PERS) > count(LOC) > count(ORG) > count(MISC)  \\
+\\Data with proper distribution which captures maximum variability in the data, tend to produce better models when applied with an appropriate classifiers.\\
+
+\item \textbf{With the amount of data available and the number of different possible labels that can be assigned, a manually annotated corpus to train an NER model might be difficult to find. Moreover, when the model is not trained with good quality data, the annotations assigned by the model are often incorrect. What are some measures that can be put in place to train better NER models? Please, let your imagination run “wild” but keep in mind what can be accomplished computationally and what cannot.
+}\\
+
+\textbf{Solution:}  In order to train better models the quality of the training data labels must be significantly high. In the scenario of Named-Entity Recognition a manually corpus is a difficult task to achieve.\\ Hence the automation in this process can significantly provide more opportunities to develop better and more efficient classifiers for this domain.\\ We can follow certain heuristics for the automated labeling of the corpus.
+\begin{itemize}
+\item Pattern recognition for certain attributes, like Location, always starts with capital letter, followed by lowercase alphabets. "Xxxxx" Similar patterns can be applied for some common labels.
+\item Understanding the structure of the sentence. For example: Sentences are primarily subdivided into Subject + Predicates. If the model is able to detect subjects and objects in the sentence, certain Name labels can be labeled with more ease.\\
+\end{itemize}
+
+
+
+\item \textbf{Additional questions for the Emma (Dataset 2) data:}
+
+\begin{enumerate}[label={\alph*.}]
+\item \textbf{Which set of 2 labels took the longest time to train? Is this time positively or negatively correlated with the amount of data available for that label set?}
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|} 
+\hline 
+\textbf{Labels} & \textbf{Count of Distinct Labels} & \textbf{Training Time in(Secs)} \\ [2ex]
+\hline 
+O,PERS & 3187, 160 & 2.5 sec\\ [1ex]
+\hline 
+O,LOC & 3331, 16 & 2.7 sec\\ [1ex]
+\hline
+O,ORG & 3345, 2 & 2.5 sec\\ [1ex]
+\hline
+\end{tabular}
+\caption{Training Time for CFRModel on Emma Dataset}
+\label{table:7}
+\end{table}
+
+From the above observation, we can see that the label \textbf{\{O, LOC\}} took the longest time(2.7 secs) to train. With reference to the training time, we can see no correlation between the amount of data available and time taken in this case. But this case cannot be generalized as the sample size is too less.\\
+
+
+
+\item  \textbf{Which set of 3 labels took the longest time to train? Is this time positively or negatively correlated?}
+\begin{center}
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|} 
+\hline 
+\textbf{Labels} & \textbf{Count of Distinct Labels} & \textbf{Training Time in(Secs)} \\ [2ex]
+\hline 
+O,PERS,LOC & 3171, 160, 16 & 3.5 sec\\ [1ex]
+\hline 
+O,ORG,LOC & 3329, 2, 16 & 3.7 sec\\ [1ex]
+\hline
+O,PERS,ORG & 3185, 160, 2 & 4.0 sec\\ [1ex]
+\hline
+\end{tabular}
+\caption{Training Time for CFRModel on Emma Dataset}
+\label{table:8}
+\end{table}
+\end{center}
+From the above observation, we can see that the label \textbf{\{O, PERS, ORG\}} took the longest time(4.0 secs) to train. With reference to the training time, we can see no correlation between the amount of data available and time taken in this case. But this case cannot be generalized as the sample size is too less.\\
+
+\item \textbf{Which set of 2 labels produced the best test results? Are these results positively or negatively correlated with the training performance of that label set?}
+
+Here the performance of label "O" is avoided. And based on the other label performance, the comparison is made.
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{Total(P)} & \textbf{Total(R)} & \textbf{Total(F1)} &\textbf{Total(TP)} &\textbf{Total(FP)} & \textbf{Total(FN)} \\ [2ex]
+\hline 
+\textbf{O, PERS} & 0.8056 & 0.5800 & 0.6744 & 29 & 7  & 21\\ [1ex]
+\hline
+\textbf{O, LOC} & 0.8750 & 0.4667 & 0.6087 & 7 & 1  & 8\\ [1ex]
+\hline
+\textbf{O, ORG} & 0 & 0  & NA & 0 & 0 & 3 \\ [1ex]
+\hline
+\end{tabular}
+\caption{Performance Measure for Emma Test Dataset for 2 Labels}
+\label{table:9}
+\end{table}
+\\From the above observation, we can see that the label \textbf{\{O, PERS\}} have better F1-score. This clearly reveals that there exist a positive correlation between the performance measures (F1-score, Recall) and the label set size  in this case. But this case cannot be generalized as the sample size is too less.\\
+
+\item \textbf{ Which set of 3 labels produced the best test results? Are these results positively or negatively correlated with the training performance of that label set?}\\
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{Total(P)} & \textbf{Total(R)} & \textbf{Total(F1)} &\textbf{Total(TP)} &\textbf{Total(FP)} & \textbf{Total(FN)} \\ [2ex]
+\hline 
+\textbf{O, PERS, LOC} & 0.7273 & 0.6154 & 0.6667 & 40 & 15  & 25\\ [1ex]
+\hline
+\textbf{O, ORG, LOC} & 0.8750 & 0.3889 & 0.5385 & 7 & 1  & 11\\ [1ex]
+\hline
+\textbf{O, PERS, ORG} & 0.7838 & 0.5472  & 0.6444 & 29 & 8 & 24 \\ [1ex]
+\hline
+\end{tabular}
+\caption{Performance Measure for Emma Test Dataset for 3 Labels}
+\label{table:10}
+\end{table}
+\\From the above observation, we can see that the label \textbf{\{O, PERS, LOC\}} have better F1-score. This clearly reveals that there exist a positive correlation between the performance measures (F1-score, Recall) and the label set size  in this case. But this case cannot be generalized as the sample size is too less.\\
+
+\item \textbf{Randomly assign labels to the data, as follows:}
+\begin{enumerate}[label={\roman*.}]
+\item \textbf{For the set of 4 labels ({O, PERS, ORG, LOC}), assign 0 to O, 1 to PERS, 2 to ORG, and 3 to LOC. For each word in the training and test datasets, calculate the line number of the word mod 4 and assign the corresponding label to the word. What is the performance of the model built using these labels? Does any label perform better than the model built using the manually curated data?}
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{O [ 0 ]} & 0.1869 & 0.1865 & 0.1867 & 83 & 361 & 362\\ [1ex]
+\hline 
+\textbf{PERS [ 1 ]} & 0.1888 & 0.1888 & 0.1888 & 84 & 361 & 361\\ [1ex]
+\hline
+\textbf{ORG [ 2 ]} & 0.1865 & 0.1865 & 0.1865  & 83 & 362 & 362\\  [1ex]
+\hline
+\textbf{LOC [ 3 ]} & 0.1869 & 0.1865 & 0.1867 & 83 & 361 & 362\\ [1ex]
+\hline
+\textbf{Totals} & 0.1873 & 0.1871 & 0.1872 & 333 & 1445 & 1447 \\  [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Emma using Random Labels for 4 Labels}
+\label{table:11}
+\end{table}
+Based on the above observations, it is clear that randomly assigning data has resulted in very poor performance as compare to the performance results obtained from manually labeled data.\\
+
+\item  \textbf{For each set of 3 labels (e.g., {O, PERS, LOC}), assign 0 to O, 1 to PERS, and 2 to LOC. For each word in the training and test datasets, calculate the line number of the word mod 3 and assign the corresponding label to the word. What is the performance of the model built using these labels? Does any label or label set perform better than the model built using the manually curated data?}
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+\textbf{Entity} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{O [ 0 ]} & 0.1216 & 0.1214 & 0.1215 & 72 & 520 & 521\\ [1ex]
+\hline 
+\textbf{PERS [ 1 ]} & 0.1214 & 0.1212 & 0.1213 & 72 & 521 & 522\\ [1ex]
+\hline
+\textbf{LOC [ 2 ]} & 0.1214 & 0.1214 & 0.1214 & 72 & 521 & 521\\ [1ex]
+\hline
+\textbf{Totals} & 0.1215 & 0.1213 & 0.1214 & 216 & 1562 & 1564 \\  [1ex]
+
+\hline
+\end{tabular}
+\caption{Performance Measure for Emma using Random Labels for 3 Labels}
+\label{table:12}
+\end{table}
+Based on the above observations, it is clear that randomly assigning data has resulted in very poor performance as compare to the performance results obtained from manually labeled data. The performance results are even bad than that of assigning 4 random labels as shown in table 11 and table 12.\\
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+
+\section{Parameter Tuning}
+Below are the aggreated performance results(Total) on different parameters of CRF Model, for Wikipedia and Emma Dataset. Only changed parameter from the default set is listed in the tables. \\
+
+For WikiPedia TestData Performance
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+ \textbf{Parameter} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{Default} &0.5799 &	0.4909 & 0.5317	& 150109 & 108745 &	155673\\ [1ex]
+\hline 
+\textbf{Maxleft=2} & 0.5798 & 0.4897 & 0.5309 & 149734 & 108531	& 156048\\ [1ex]
+\hline 
+\textbf{Maxleft=3}* & NA & NA & NA & NA & NA & NA\\ [1ex]
+\hline 
+\textbf{maxNGramLeng=4} & 0.5733 & 0.4893 &	0.5280 & 149619	& 111338 & 156163\\ [1ex]
+\hline 
+\textbf{useNgram=false} & 0.1216 & 0.1214 & 0.1215 & 72 & 520 & 521\\ [1ex]
+\hline 
+\end{tabular}
+\caption{Performance Measures for different set of parameters for Wikipedia Dataset}
+\label{table:13}
+\end{table}
+
+*System out of memory.\\
+
+For Emma TestData Performance
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ |c|c|c|c|c|c|c|} 
+\hline 
+ \textbf{Parameter} & \textbf{P} & \textbf{R} & \textbf{F1} &\textbf{TP} &\textbf{FP} & \textbf{FN} \\ [2ex]
+\hline 
+\textbf{Default} &	0.7818&	0.6324	&0.6992	&43	&12	&25\\ [1ex]
+\hline 
+\textbf{Maxleft=2} & 0.7679	& 0.6324	& 0.6935 &	43 & 13	 & 25\\ [1ex]
+\hline 
+\textbf{Maxleft=3}** & 0.7679 & 0.6324	& 0.6935 &	43 & 13	 & 25\\ [1ex]
+\hline 
+\textbf{maxNGramLeng=4} &0.8000	& 0.6471 &	0.7154 & 44 & 11 & 24\\ [1ex]
+\hline 
+\textbf{useNgram=false} &0.7143	& 0.5882 & 0.6452 & 40 & 16 & 28\\ [1ex]
+\hline 
+\end{tabular}
+\caption{Performance Measures for different set of parameters for Emma Dataset }
+\label{table:14}
+\end{table}
+
+\newpage
+\textbf{Inference}
+\begin{itemize}
+\item Performance is low, if we do not include Ngram i.e. useNgram=false.
+\item If the maximum left and right words are varied in model building, the more left or right words are considered the more time and memory for model builiding is necessary.
+\item MaxNGramLength = 4 gives almost the same(slightly less) performance measures as compare to MaxNGramLength = 6 (Default Parameter).
+
+\end{itemize}
+
+\section{References :} 
+\begin{enumerate}[label={[\arabic*]}]
+\item  Jenny Rose Finkel, Trond Grenager, and Christopher Manning. 2005. Incorporating Non-local Information into Information Extraction Systems by Gibbs Sampling. Proceedings of the 43nd Annual Meeting of the Association for Computational Linguistics (ACL 2005), pp. 363-370. http://nlp.stanford.edu/~manning/papers/gibbscrf3.pdf
+\item  Kanchana Padmanabhan, Project Description Document- Named Entity Recognition.
+\item Nathalie Japkowicz, Mohak Shah, Performance Evaluation for Learning Algorithms: Techniques, Applications, and Issues, Tutorial at International Conference on Machine Learning, 2012, Edinburgh, Scotland.
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
+
