@@ -1,18 +1,28 @@
 Datamining Algorithms
 ======================
-Here are the implementation of certain data mining algorithms from scratch and also the usage of already existing implementation.
+Here are the implementation of few data mining algorithms from scratch and also the usage of already existing implementation from research papers.
 
-### Clustering
-K-means
+* K-means
 
-Bisecting K-means
+* Bisecting K-means
 
-Spectral Clustering : Community Detection(SLPA)
+* Twitter Sentiment Analysis
 
-### Classification
+* Web Analytics
+
+* Kernelization
+
+* Named-Entity Recognition
+
+###Graph Data Mining
+
+* Community Detection in Graphs (SLPA)
+
+* Anomaly Detection in Graphs 
+
+* Virus Propagation (Graph Networks)
 
 
-Data Science Tools
-======================
+###Data Science Tools
 
-Hadoop : Few sample programs
+* Hadoop : Few sample programs
