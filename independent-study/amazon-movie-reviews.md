@@ -15,11 +15,11 @@ Timespan : Aug 1997 - Oct 2012
 
 **Year Wise Distribution**
 
-![Year Wise Distribution](https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_year.png)
+-> ![Year Wise Distribution](https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_year.png) <- 
 
 **Quarter Wise Distribution**  
 
-![Quarter Wise Distribution](https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_quarter.png)
+-> ![Quarter Wise Distribution](https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_quarter.png) ->
 
 
 
