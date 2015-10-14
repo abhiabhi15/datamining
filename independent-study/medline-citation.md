@@ -14,7 +14,7 @@ $ wget ftp://ftp.nlm.nih.gov/nlmdata/sample/medline/*.gz
 ```
 **Data Field Description**: The data fields description and details can be found at https://www.nlm.nih.gov/bsd/mms/medlineelements.html#crdt  
 
-**Full Data Access**: https://www.nlm.nih.gov/databases/journal.html
+**Full Data Access**: https://www.nlm.nih.gov/databases/journal.html  
 For Archive Data: http://activeintelligence.org/blog/archive/pubmed-dataset/
 
 
