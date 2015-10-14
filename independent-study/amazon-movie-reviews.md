@@ -14,12 +14,15 @@ Median no. of words per review : 101
 Timespan : Aug 1997 - Oct 2012  
 
 **Year Wise Distribution**
-
-->![Year Wise Distribution](https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_year.png)<- 
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_year.png"/>
+</p>
 
 **Quarter Wise Distribution**  
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_quarter.png" />
+</p>
 
-->![Quarter Wise Distribution](https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_quarter.png)<-
 
 
 
