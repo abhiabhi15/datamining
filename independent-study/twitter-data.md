@@ -132,6 +132,6 @@ But these APIs have **rate limit** issues. Only 15 such calls can be made in a 1
 
 Here we need to apply a filter for those followers and friends out of that radius. Also we need to analyze the data distribution before exploring and applying such filters.
 
-**Limitations: **
+**Limitations:**  
 On user/search we can get only 1000 matching users. These users will be mostly celebrities or organization/group pages.
 
