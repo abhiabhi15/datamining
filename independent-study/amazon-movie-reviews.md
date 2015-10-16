@@ -24,7 +24,7 @@ Timespan : Aug 1997 - Oct 2012
 </p>
 
 ### Amazon Movie Review Graph
-Amazon movie review data can be transformed into attributed graph network data. In this network we have :
+Amazon movie review data can be transformed into attributed graph network data. In this network we have:  
 **Nodes** Movie reviewers having attributes such as profile name, number of reviews, avg score, avg help score and genre map.    
 **Edges** If two reviews are similar on attributes and have reviewed same product.  
 
