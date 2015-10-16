@@ -23,6 +23,11 @@ Timespan : Aug 1997 - Oct 2012
 <img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/movie-review/movie_review_quarter.png" />
 </p>
 
+### Amazon Movie Review Graph
+Amazon movie review data can be transformed into attributed graph network data. In this network we have :
+**Nodes** Movie reviewers having attributes such as profile name, number of reviews, avg score, avg help score and genre map.    
+**Edges** If two reviews are similar on attributes and have reviewed same product.  
+
 
 
 
