@@ -17,5 +17,5 @@ For the dynamic attributed graphs community detection, I have explored few datas
 | Dataset         | Useful Attributes  | Derived Attributes |  Time Attributes | #nodes | #edges | Download Link
 |:---------------:|:-----------:|:-------------:|:--------------:|:-------:|:------:|:-------------|
 | [DBLP](https://github.com/abhiabhi15/datamining/blob/master/independent-study/dblp.md)| name, journal, title | gender, #papers | year| 2.32M | 10.23M | http://dblp.uni-trier.de/xml/ |    
-| [Medline](https://github.com/abhiabhi15/datamining/blob/master/independent-study/amazon-movie-reviews.md)| name, mesh major, mesh minor | gender, #articles | year| 2.32M | 10.23M | https://www.nlm.nih.gov/bsd/sample_records_avail.html |    
-| [Twitter Geography](https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter-data.md)| name, journal, title | gender, #papers | year| 2.32M | 10.23M | http://dblp.uni-trier.de/xml/ |    
+| [Medline](https://github.com/abhiabhi15/datamining/blob/master/independent-study/amazon-movie-reviews.md)| name, mesh major, mesh minor | #articles, mesh titles count | year| 240K (articles) |  | https://www.nlm.nih.gov/bsd/sample_records_avail.html |    
+| [Twitter Geography](https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter-data.md)| name, #friends, #followers, location, #tweets, #favorites  | gender | timestamp | 1000 (users) |  | https://dev.twitter.com/rest/public |    
