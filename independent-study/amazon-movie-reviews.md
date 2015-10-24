@@ -1,7 +1,7 @@
 ###Amazon Movie Review Data Report
 
 
-**Dataset URL :** https://snap.stanford.edu/index.html
+**Dataset URL :** https://snap.stanford.edu/data/web-Movies.html
 
 **Description:** This dataset consists of movie reviews from amazon. The data span a period of more than 10 years, including all ~8 million reviews up to October 2012. Reviews include product and user information, ratings, and a plaintext review. 
 
