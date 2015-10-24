@@ -14,7 +14,14 @@ $ wget ftp://ftp.nlm.nih.gov/nlmdata/sample/medline/*.gz
 ```
 **Data Field Description**: The data fields description and details can be found at https://www.nlm.nih.gov/bsd/mms/medlineelements.html#crdt  
 
-**Full Data Access**: https://www.nlm.nih.gov/databases/journal.html  
+**Full Data Access**:  Via Query Tool and it is restricted to NLM’s registered MEDLINE/PubMed licensees. https://www.nlm.nih.gov/databases/journal.html  
+
+####Sample Data Distribution For Number of Articles, per year
+
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/medline/created_date.png" />
+</p>
+
 For Archive Data: http://activeintelligence.org/blog/archive/pubmed-dataset/
 
 
