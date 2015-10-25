@@ -23,7 +23,6 @@ For the dynamic attributed graphs community detection, I have explored few datas
 | [Bitcoin Network](https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin.md)| sender-id, receiver-id, amount($B) | amt($USD) | timestamp | 6.2M | 37M | http://compbio.cs.uic.edu/data/bitcoin/bitcoin_uic_data_and_code_20130107.zip |    
 
 ###Community Detection Algorithms
-===
 1. **[LabelRank & LabelRankT](https://github.com/abhiabhi15/datamining/blob/master/independent-study/papers/LabelRank:%20A%20Stabilized%20Label%20Propagation.pdf):** Dynamic Graph Community Detection Algorithm    
    Code: [Labelrank R Implementation](https://github.com/abhiabhi15/datamining/tree/master/independent-study/code/labelrank)  
    Analysis: [Results and Discussion on Labelrank](https://github.com/abhiabhi15/datamining/blob/master/independent-study/algorithms/labelrank.md)    
