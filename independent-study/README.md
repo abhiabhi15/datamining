@@ -22,15 +22,14 @@ For the dynamic attributed graphs community detection, I have explored few datas
 | [Amazon Movie Reviews](https://github.com/abhiabhi15/datamining/blob/master/independent-study/amazon-movie-reviews.md)| name, id, review score, helpfulness | genre, genre_count, #reviews, #avg_score | timestamp | 889K | 7.9M | https://snap.stanford.edu/data/web-Movies.html |    
 | [Bitcoin Network](https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin.md)| sender-id, receiver-id, amount($B) | amt($USD) | timestamp | 6.2M | 37M | http://compbio.cs.uic.edu/data/bitcoin/bitcoin_uic_data_and_code_20130107.zip |    
 
-
 ##Community Detection Algorithms
-=======
-1. [LabelRank & LabelRankT]:   
-   Code:   
-   Analysis:  
+===
+1. **[LabelRank & LabelRankT](https://github.com/abhiabhi15/datamining/blob/master/independent-study/papers/LabelRank:%20A%20Stabilized%20Label%20Propagation.pdf):** Dynamic Graph Community Detection Algorithm    
+   Code: [Labelrank R Implementation](https://github.com/abhiabhi15/datamining/tree/master/independent-study/code/labelrank)  
+   Analysis: [Results and Discussion on Labelrank](https://github.com/abhiabhi15/datamining/blob/master/independent-study/algorithms/labelrank.md)    
    
-2. SAC: (Structure-Attribute Clustering):
-   Code:
-   Analysis:
+2. **[SAC (Structure-Attribute Clustering)](https://github.com/abhiabhi15/datamining/blob/master/independent-study/papers/Community%20detection%20based%20on%20structural%20and%20attribute%20similarities.pdf):** Static Attributed Graph Community Detection Algorithm  
+   Code: [SAC1 R Implementation](https://github.com/abhiabhi15/datamining/tree/master/independent-study/code/sac)  
+   Analysis: [Results and Discussion on SAC](https://github.com/abhiabhi15/datamining/blob/master/independent-study/algorithms/sac.md)      
 
 
