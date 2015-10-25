@@ -29,6 +29,14 @@ These websites provide information on pricing, trading, market capitalisations, 
 - Other scholar articles and research papers [link](https://scholar.google.com/scholar?q=bitcoin+data+analysis&hl=en&as_sdt=0&as_vis=1&oi=scholart&sa=X&ved=0CBsQgQMwAGoVChMI_aK9oKKiyAIVSZENCh22CQ8S).
 
 
+##Exploratory Data Analysis
+
+Dataset: [Bitcoin Transaction Network Dataset](http://compbio.cs.uic.edu/data/bitcoin/)  
+Nodes:4.86M, Edges: 25M    
+
+**1- user_edges.txt:** transaction_key, user_from_key, user_to_key, timestamp, value(bitcoin)  
+**2- transactionkey_list.txt:** transaction_key_string  
+   
 
 
 
