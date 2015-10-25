@@ -1,6 +1,5 @@
 ###Independent Study Coursework :  CSC630
 ====
-
 ###Datasets
 
 For the dynamic attributed graphs community detection, I have explored few datasets of different domain and their attributes,
@@ -24,9 +23,14 @@ For the dynamic attributed graphs community detection, I have explored few datas
 | [Bitcoin Network](https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin.md)| sender-id, receiver-id, amount($B) | amt($USD) | timestamp | 6.2M | 37M | http://compbio.cs.uic.edu/data/bitcoin/bitcoin_uic_data_and_code_20130107.zip |    
 
 
-###Algorithms
-====
-1. LabelRank & LabelRankT:
-   Code: 
+##Community Detection Algorithms
+=======
+1. [LabelRank & LabelRankT]:   
+   Code:   
+   Analysis:  
    
-2. SAC: (Structure-Attribute Clustering)
+2. SAC: (Structure-Attribute Clustering):
+   Code:
+   Analysis:
+
+
