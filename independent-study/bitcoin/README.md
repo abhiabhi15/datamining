@@ -48,8 +48,46 @@ b) Total BTC Vs USD Transactions (In Log Scale)
 <img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin/plots/bitcoin-ts.png" />
 </p>
 
+###Feature Engineering
+Aggregated user level features: Using BTC/USD Conversion Rates.  
 
+- Total USD Sent
+- Total USD Received
+- Number of Transactions as Sender
+- Number of Transactions as Receiver
+- Highest Amount Transaction in USD
 
+**Summary Stats of the Features:**  
+```
+total_usd_sent      total_usd_received  num_sent_txns     num_received_txns highest_usd_txn    
+ Min.   :        0   Min.   :        0   Min.   :      0   Min.   :      0   Min.   :      0    
+ 1st Qu.:        2   1st Qu.:        3   1st Qu.:      2   1st Qu.:      1   1st Qu.:      3     
+ Median :       64   Median :       67   Median :      2   Median :      1   Median :     65    
+ Mean   :     2418   Mean   :     2418   Mean   :      5   Mean   :      5   Mean   :   2226    
+ 3rd Qu.:      299   3rd Qu.:      299   3rd Qu.:      2   3rd Qu.:      1   3rd Qu.:    289    
+ Max.   :205196208   Max.   :204216064   Max.   :4871033   Max.   :4886174   Max.   :8014082   
+```
 
+**Basic K-Means Clustering:**  
+
+- Random sample of 800,000 users out of 4.84M users
+- Scaled using scale function
+
+**Elbow plot for K-means cluster for Optimal Clusters:**
+
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin/plots/kmeans_elbow.png" />
+</p>
+
+**Fixing clustering parameter,k =6**  
+Clustering Results:
+```
+    1       2       3        4       5       6 
+   8480   31481 4798163      56    3758      62 
+```
+
+- From the ground-truth data, for Oct-2011 Mt. Fox theft: One user-id clustered in cluster-6, rest ~40-45 users clustered in cluster-3
+- Better pre-processing technique, along with other features can potentially identify such thefts
+- Other clustering algorithms should be tested
 
 
