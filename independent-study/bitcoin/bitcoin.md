@@ -43,6 +43,10 @@ a) Daily Number of Distinct Transaction
 <img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/bitcoin/time-series.png" />
 </p>
 
+b) Total BTC Vs USD Transactions (In Log Scale)  
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/bitcoin/bitcoin-ts.png" />
+</p>
 
 
 
