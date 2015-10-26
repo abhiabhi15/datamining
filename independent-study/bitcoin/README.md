@@ -40,12 +40,12 @@ Nodes:4.86M, Edges: 25M    (Till Januuary 7, 2013)
 **Time Series Plot**:    
 a) Daily Number of Distinct Transaction  
 <p align="center">
-<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/bitcoin/time-series.png" />
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin/plots/time-series.png" />
 </p>
 
 b) Total BTC Vs USD Transactions (In Log Scale)  
 <p align="center">
-<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/bitcoin/bitcoin-ts.png" />
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin/plots/bitcoin-ts.png" />
 </p>
 
 
