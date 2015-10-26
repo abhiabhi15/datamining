@@ -32,11 +32,15 @@ These websites provide information on pricing, trading, market capitalisations, 
 ##Exploratory Data Analysis
 
 Dataset: [Bitcoin Transaction Network Dataset](http://compbio.cs.uic.edu/data/bitcoin/)  
-Nodes:4.86M, Edges: 25M    
+Nodes:4.86M, Edges: 25M    (Till Januuary 7, 2013)
 
 **1- user_edges.txt:** transaction_key, user_from_key, user_to_key, timestamp, value(bitcoin)  
 **2- transactionkey_list.txt:** transaction_key_string  
    
+**Time Series Plot**  
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/bitcoin/time-series.png" />
+</p>
 
 
 
