@@ -56,7 +56,7 @@ https://dev.twitter.com/rest/reference/get/friends/ids
 **Friends Distribution**  
 
 <p align="center">
-<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/twitter/friends.png"/>
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter/plots/friends.png"/>
 </p>
 
 ```
@@ -67,7 +67,7 @@ https://dev.twitter.com/rest/reference/get/friends/ids
 
 **Followers Distribution**
 <p align="center">
-<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/twitter/followers.png"/>
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter/plots/followers.png"/>
 </p>
 
 ```
