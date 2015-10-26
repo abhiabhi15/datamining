@@ -37,7 +37,7 @@ For a given page id, we get the same users. Here the geocode query takes latitud
 Here, I used http://itouchmap.com/latlong.html service, which allows us to pin-point the location and get the co-ordinate data for that location using map interface.  
 
 <p align="center">
-	<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/twitter/geo1.png" />
+	<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter/plots/geo1.png" />
 </p>
 
 
@@ -47,7 +47,7 @@ Here, I used http://itouchmap.com/latlong.html service, which allows us to pin-p
 For page:1, we get some of the top users of the location, and parsed the key information of the users.  
 
 <p align="center">
-	<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/twitter/geo2.png" />
+	<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter/plots/geo2.png" />
 </p>
 
 **20 Users Data for Page-1**
@@ -86,7 +86,7 @@ Screen Name =NYTimeskrugman, followers = 1423573, location = New York City, frie
 
 
 <p align="center">
-	<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/twitter/geo3.png" />
+	<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter/plots/geo3.png" />
 </p>
 
 **20 Users Data for Page-1**  
