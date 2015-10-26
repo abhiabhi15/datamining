@@ -25,7 +25,7 @@ For the dynamic attributed graphs community detection, I have explored few datas
 
 ###Community Detection Algorithms
 1. **[LabelRank & LabelRankT](https://github.com/abhiabhi15/datamining/blob/master/independent-study/papers/LabelRank:%20A%20Stabilized%20Label%20Propagation.pdf):** Dynamic Graph Community Detection Algorithm    
-   Code: [Labelrank R Implementation](https://github.com/abhiabhi15/datamining/tree/master/independent-study/algorithms/labelrank/labelrank.R)  
+   Code: [Labelrank R Implementation](https://github.com/abhiabhi15/datamining/tree/master/independent-study/algorithms/labelrank/labelRank.R)  
    Analysis: [Results and Discussion on Labelrank](https://github.com/abhiabhi15/datamining/blob/master/independent-study/algorithms/labelrank)    
    
 2. **[SAC (Structure-Attribute Clustering)](https://github.com/abhiabhi15/datamining/blob/master/independent-study/papers/Community%20detection%20based%20on%20structural%20and%20attribute%20similarities.pdf):** Static Attributed Graph Community Detection Algorithm  
