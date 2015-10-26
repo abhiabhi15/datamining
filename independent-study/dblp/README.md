@@ -32,7 +32,7 @@ Total number of papers = 1330099 (~1.33 Million)
 Currently, aggregating papers by authors and years.  
 
 <p align="center">
-<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/dblp/authors.png" />
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/dblp/plots/authors.png" />
 </p>
 
 Then we can add some more attributes to the author nodes.
