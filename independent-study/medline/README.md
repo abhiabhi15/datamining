@@ -19,7 +19,7 @@ $ wget ftp://ftp.nlm.nih.gov/nlmdata/sample/medline/*.gz
 ####Sample Data Distribution For Number of Articles, per year
 
 <p align="center">
-<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/plots/medline/created_date.png" />
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/medline/plots/created_date.png" />
 </p>
 
 For Archive Data: http://activeintelligence.org/blog/archive/pubmed-dataset/
