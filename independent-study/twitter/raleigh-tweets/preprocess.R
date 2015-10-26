@@ -25,7 +25,7 @@ preprocess <- function(tweets){
       return( x )
     }
     
-    tweets <- tm_map(tweets,  content_transformer(removeTwitterHandle))
+    #tweets <- tm_map(tweets,  content_transformer(removeTwitterHandle))
     tweets <- tm_map(tweets,  content_transformer(removePunctuations))
     tweets <- tm_map(tweets,  content_transformer(removeURL))
     tweets <- tm_map(tweets,  content_transformer(removePunctuation))
@@ -33,9 +33,9 @@ preprocess <- function(tweets){
     
     custom_stop_words <- readLines("stop-word.txt")
     tweets <- tm_map(tweets, content_transformer(tolower))
-    tweets <- tm_map(tweets, removeWords, c(custom_stop_words,"rt") )
+    #tweets <- tm_map(tweets, removeWords, c(custom_stop_words,"rt") )
     tweets <- tm_map(tweets, stripWhitespace)  
-    tweets <- tm_map(tweets, stemDocument)
+    #tweets <- tm_map(tweets, stemDocument)
     tweets<-data.frame(text=unlist(sapply(tweets, `[`, "content")), 
                           stringsAsFactors=F)
     return(tweets)
