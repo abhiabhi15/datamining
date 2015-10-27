@@ -9,7 +9,7 @@ For the dynamic attributed graphs community detection, I have explored few datas
 3. **[Twitter Geography Filtered Dataset](https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter):** `(Nodes:users, Edges:followers/friends)`
 4. **[Amazon Movie Review Dataset](https://github.com/abhiabhi15/datamining/blob/master/independent-study/amazon-movie-reviews):** `(Nodes:reviewers, Edges: same product reviews)`
 5. **[Bitcoin Dataset](https://github.com/abhiabhi15/datamining/blob/master/independent-study/bitcoin):** `(Nodes:users, Edges: transactions)`
-6. **[Raleigh Demdebate Dataset](https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter/raleigh_tweets):** `(Nodes:users, Edges:followers/friends)`
+6. **[Raleigh Demdebate Dataset](https://github.com/abhiabhi15/datamining/blob/master/independent-study/twitter/raleigh-tweets):** `(Nodes:users, Edges:followers/friends)`
 
 
 ####Summary:
