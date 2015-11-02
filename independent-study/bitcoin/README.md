@@ -1,8 +1,9 @@
 ## Bitcoin Data, and other resources
 
 ###Overview
-Bitcoin [(bitcoin.org)](https://bitcoin.org/en/) is a digital, cryptographically secure currency. Bitcoin allows users to securely and anonymously retain and transfer value in a decentralized P2P network, and is one of the largest open microeconomic transaction network datasets available. 
-What is Bitcoin ? https://www.menufy.com/bitcoin
+Bitcoin [(bitcoin.org)](https://bitcoin.org/en/) is a digital, cryptographically secure currency. Bitcoin allows users to securely and anonymously retain and transfer value in a decentralized P2P network, and is one of the largest open microeconomic transaction network datasets available.   
+What is Bitcoin ? https://www.menufy.com/bitcoin  
+How global locations are tracked? https://bitnodes.21.co/dashboard/  
 
 ###Dataset and Sample Code Repository
 - A bitcoin dataset extracted from it's inception to April 7, 2012, containing 6.2M nodes and 37M directed, weighted, time-stamped edges. This new dataset, its metadata, and extraction code is available at:[Bitcoin Transaction Network Dataset](http://compbio.cs.uic.edu/data/bitcoin/)
