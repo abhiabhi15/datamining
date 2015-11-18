@@ -1,13 +1,12 @@
-
+import os
 from sklearn import ensemble
 
 # The location of the facebook100 dataset--i.e., the place you unzipped
 # Facebook100.zip
-SRC_DATA_DIR = '/home/conradlee/Downloads/facebook100/'
-
+SRC_DATA_DIR = os.environ['DATA'] + '/facebook/facebook100/'
 # The path of the github repository, where the benchmarking code
 # lives
-BENCHMARK_ROOT = '/home/conradlee/github/network-community-benchmark'
+BENCHMARK_ROOT = os.environ['ISTUDY'] + '/algorithms/network-community-benchmark-master'
 
 # The number of folds of the 10-fold cross validation to
 # carry out (max 10)
