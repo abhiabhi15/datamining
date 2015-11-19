@@ -28,6 +28,26 @@ Amazon movie review data can be transformed into attributed graph network data. 
 **Nodes** Movie reviewers having attributes such as profile name, number of reviews, avg score, avg help score and genre map.    
 **Edges** If two reviews are similar on attributes and have reviewed same product.  
 
+###Movie Review Aggregation
+
+In this approach, we thought of aggregating reviews per movie. This will give us all the reviews related to a particular productId (movies). Then, each movies reviews can be separated in k reviews i.e. first k reviews or last k reviews or k-intervals etc. These k reviews will be taken to form an attributed graph community and such communities reviews and transitions will be monitored for its next or last k reviews.  
+
+**Exploratory Analysis**  
+We filtered movie reviews from 2005 to 2011, and the below plots shows the movie reviews distribution in log-plot. We can observe pareto law in the network i.e. 80% of the movies have reviews less than 10-20. 
+
+**Movie Reviews Log Scale Distribution**  
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/amazon-movie-reviews/plots/log_plot_movie_reviews.png" />
+</p>
+
+**Movie Review Count Cumulative Distribution**  
+<p align="center">
+<img src="https://github.com/abhiabhi15/datamining/blob/master/independent-study/amazon-movie-reviews/plots/movie_reviews.png" />
+</p>
+
+
+
+
 
 
 
