@@ -92,8 +92,6 @@ comm <- get_louvian_community(g)
 print(comm)
 modularity(g, comm)
 
-c5 <- multilevel.community(g)
-cat("louvain method = ", modularity(c5) ,"\n")
 #plot(g, vertex.color= comm)
 # 
 #similarity(data, comm, attrs)/nrow(data)
