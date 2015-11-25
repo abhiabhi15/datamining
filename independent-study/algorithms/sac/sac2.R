@@ -1,23 +1,22 @@
 ## SAC1 Algorithm
 rm(list=ls())
 library(igraph)
-source("algorithms/sac/helper.R")
-
-g <- read.graph(file= "polblogs/data/polblogs.gml", format=c("gml"))
-
-mat <- as.matrix(read.table("algorithms/sample_graph1.txt", sep="\t", header=F))
-rownames(mat) <- 1:10
-colnames(mat) <- 1:10
-g1 <- graph.adjacency(mat)
-g1 = as.undirected(g1)
-plot(g1)
-
-## Checking graphs for comm detect algos
-compareModularity(g1)
-
-cal <- read.csv("~/pycharm-4.0.5//bin/Caltech36_adj.csv", header=F) 
-dim(cal)
+source("helper.R")
+cal <- read.csv("../facebook/data/Caltech36_adj.csv", header=F) 
 mat1 <- data.matrix(cal,rownames.force=NA)
-g2 <- graph.adjacency(mat1)
-g2 <- as.undirected(g2)
-compareModularity(g2)
+g <- graph.adjacency(mat1)
+
+sampleData <- read.csv("../facebook/data/Caltech36.csv")
+sampleData <- scale(sampleData, center = TRUE, scale = TRUE)
+
+attrs <- c("year","dorm","gender")
+
+wss <- (nrow(x=sampleData)-1)*sum(apply(sampleData,2,var))
+for (i in 1:60){
+  wss[i] <- sum(kmeans(sampleData, centers=i)$withinss)
+}
+
+# Elbow Plot
+plot(1:60, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares", main="Kmeans Optimal Number of Clusters",col="blue")
+
+

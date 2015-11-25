@@ -11,7 +11,6 @@ reviews <- reviews[with(reviews, order(-reviews)),]
 freq <- as.data.frame(table(reviews$reviews))
 freq$Freq <- round(log(freq$Freq + 1))
 head(freq)
-reviews 
 
 p <- ggplot(freq, aes(Var1, Freq))
 p + geom_point(aes(colour = Freq)) + ggtitle("Movie Reviews Count (Log Scale )") + ylab("Reviews Count") + xlab("Movies")  + theme( legend.position = "none")
@@ -29,5 +28,5 @@ ggplot(mov_stats, aes(x = as.factor(Count), y = NumMovies, fill = Count)) +
   geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1), 
                                       legend.position = "none")
 
-filtered <- reviews[(reviews$reviews > 700),]
-write.csv(filtered, file="movies_700_plus_reviews.csv", row.names=F, quote=FALSE)
+filtered <- reviews[(reviews$reviews > 300),]
+write.csv(filtered, file="movies_300_plus_reviews.csv", row.names=F, quote=FALSE)
