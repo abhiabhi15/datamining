@@ -39,10 +39,6 @@ mod.value <- function(j, g, comm, i, data, attrs){
 }
 
 get_louvian_community <- function(g){
-  
-  data <- attrData
-  attrs <- c("year","dorm","gender")
-  
   comm <- 1:vcount(g)
   newComm <- comm
   iter = 1
@@ -50,20 +46,20 @@ get_louvian_community <- function(g){
     cat("Iteration = ", iter, "\n")
     changes = 0
     org_mod = modularity(g, comm)
-    print(unique(comm))
+    print(length(unique(comm)))
     for(i in 1:vcount(g)){
-      mod.vector = sapply(unique(comm), mod.value , g, comm, i, data, attrs)
+      nbs <- neighbors(g, i)
+      mod.vector = sapply(unique(comm[nbs]), mod.value , g, comm, i, data, attrs)
       delta_Q = mod.vector - org_mod
       max <- max(delta_Q)
       if(!is.infinite(max) && max > 0){
-        ucomm <- unique(comm)
+        ucomm <- unique(comm[nbs])
         newComm[i] <- ucomm[which.max(delta_Q)]
         changes <- changes + 1
-        cat("vertex = ", i , " max = " , max , "new comm = ", ucomm[which.max(delta_Q)] ,"\n");
+      #  cat("vertex = ", i , " max = " , max , "new comm = ", ucomm[which.max(delta_Q)] ,"\n");
       }
       comm <- newComm
     }
-    
     cat(", changes = ",  changes, "\n")
     if(changes == 0){
       break;
@@ -79,7 +75,7 @@ get_louvian_community <- function(g){
 # mat <- as.matrix(read.table("sample_graph1.txt", sep="\t", header=F))
 # g <- graph.adjacency(mat)
 
- cal <- read.csv("../facebook/data/Caltech36_adj.csv", header=F) 
+ cal <- read.csv("../facebook/data/Caltech36_adj.csv", header=F)
  mat1 <- data.matrix(cal,rownames.force=NA)
  g <- graph.adjacency(mat1)
  attrData <- read.csv("../facebook/data/Caltech36.csv")
@@ -96,6 +92,8 @@ comm <- get_louvian_community(g)
 print(comm)
 modularity(g, comm)
 
+c5 <- multilevel.community(g)
+cat("louvain method = ", modularity(c5) ,"\n")
 #plot(g, vertex.color= comm)
 # 
 #similarity(data, comm, attrs)/nrow(data)
