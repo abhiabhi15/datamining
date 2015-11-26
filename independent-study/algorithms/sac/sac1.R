@@ -14,7 +14,7 @@ mode <- function(x) {
 }
 
 commSimAttr <- function(i, data, comm, attrs){
-  t1 = Sys.time()
+  
   attrDF <- data[i,] 
   # Attributes of the majority value of community = cmIndex
   lcomm <- data[which(comm == comm[i]),]
@@ -22,8 +22,6 @@ commSimAttr <- function(i, data, comm, attrs){
   print(Sys.time() - t1)  
   #Computing sum using 
   sum(sapply(1:length(attrs), simFunc, attrDF))/length(attrs)    
-
-  stop()
 }
 
 similarity <- function(data, comm, attrs){
@@ -38,36 +36,6 @@ mod.value <- function(j, g, comm, i, data, attrs){
   modularity(g, comm)
 }
 
-get_louvian_community <- function(g){
-  comm <- 1:vcount(g)
-  newComm <- comm
-  iter = 1
-  while(TRUE){
-    cat("Iteration = ", iter, "\n")
-    changes = 0
-    org_mod = modularity(g, comm)
-    print(length(unique(comm)))
-    for(i in 1:vcount(g)){
-      nbs <- neighbors(g, i)
-      mod.vector = sapply(unique(comm[nbs]), mod.value , g, comm, i, data, attrs)
-      delta_Q = mod.vector - org_mod
-      max <- max(delta_Q)
-      if(!is.infinite(max) && max > 0){
-        ucomm <- unique(comm[nbs])
-        newComm[i] <- ucomm[which.max(delta_Q)]
-        changes <- changes + 1
-      #  cat("vertex = ", i , " max = " , max , "new comm = ", ucomm[which.max(delta_Q)] ,"\n");
-      }
-      comm <- newComm
-    }
-    cat(", changes = ",  changes, "\n")
-    if(changes == 0){
-      break;
-    }
-    iter <- iter + 1
-  }
-  return(newComm)
-}
 
 
 #g <- read.graph(file= "../polblogs/data/polblogs.gml", format=c("gml"))
