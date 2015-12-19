@@ -7,37 +7,52 @@ source("helper.R")
 #### SAC Helper Functions
 
 similarity <- function(j, i, data){
-    as.numeric(dist(data[c(i,j),], method="cosine")) 
+    dist(data[c(i,j),], method="cosine")
 }
 
-sim.value <- function(j, data, i, comm){
+sim.value <- function(j, data, comm, i){
     local_comm = comm[which(comm == j)]
-    sum(sapply(local_comm, similarity, i, data))
+    local_comm = apply(data[local_comm,], 2, mean)
+    #sum(sapply(local_comm, similarity, i, data))/length(local_comm)
+    x = data[i,]
+    x = rbind(x, local_comm)              
+    dist(x, method="cosine")
 }
 
-get_louvian_community <- function(g, data){
+mod.value <- function(j, g, comm, i){
+  comm[i] <- j
+  modularity(g, comm)
+}
+
+get_louvian_community <- function(g, data, alpha=0.5){
   comm <- 1:vcount(g)
   iter = 1
+  csize = 0
   while(TRUE){
     cat("Iteration = ", iter, "\n")
     changes = 0
-    #org_mod = modularity(g, comm)
-    cat("Community Size =", length(unique(comm)), "\n")
+    org_mod = modularity(g, comm)
+    if(iter > 15 && (csize == length(unique(comm)))){
+        break;
+    }
+    csize = length(unique(comm))
+    cat("Community Size =", csize, "\n")
     for(i in 1:vcount(g)){
       nbs <- neighbors(g, i)
       if(length(nbs) > 0){
-        delta.similarity = sapply(unique(comm[nbs]), sim.value , data, i, comm)
-        print(delta.similarity)
-        max <- max(delta.similarity)
+        mod.vector = sapply(unique(comm[nbs]), mod.value , g, comm, i)
+        delta.modularity = mod.vector - org_mod
+        delta.similarity = sapply(unique(comm[nbs]), sim.value , data, comm, i)
+        delta = alpha * delta.modularity + ((1 - alpha) * delta.similarity)
+        max <- max(delta)
         if(!is.infinite(max) && max > 0){
           ucomm <- unique(comm[nbs])
-          comm[i] <- ucomm[which.max(delta.similarity)]
+          comm[i] <- ucomm[which.max(delta)]
           changes <- changes + 1
-          cat("vertex = ", i , ", max = " , max , ", new comm = ", ucomm[which.max(delta.similarity)] ,"\n");
+        #  cat("vertex = ", i , " max = " , max , "new comm = ", ucomm[which.max(delta)] ,"\n");
         }  
       }
     }
-    print(comm)
     cat(", changes = ",  changes, "\n")
     if(changes == 0){
       break;
@@ -51,20 +66,13 @@ get_louvian_community <- function(g, data){
 # mat <- as.matrix(read.table("sample_graph1.txt", sep="\t", header=F))
 # g <- graph.adjacency(mat)
 
-cal <- read.csv("../facebook/data/Caltech36_adj.csv", header=F)
-mat1 <- data.matrix(cal,rownames.force=NA)
-g <- graph.adjacency(mat1)
+g <- read.graph(file="data/fb_caltech_small_edgelist.txt", format = c("edgelist"))
 
-comps <- decompose.graph(g)
-
-attrData <- read.csv("../facebook/data/Caltech36.csv")
-attrs <- c("year","dorm","gender","student_fac","major")
-attrData <- attrData[, attrs]
-attrData[,attrs] <- lapply(attrData[,attrs] , factor)
-d = model.matrix(~ . + 0, data=attrData, contrasts.arg = lapply(attrData, contrasts, contrasts=FALSE))
- 
+attrData <- read.csv("data/fb_caltech_small_attrlist.csv")
+attrData <- attrData[,1:34]
+names(attrData)
 t1 = Sys.time()
-get_louvian_community(g, d)
+comm = get_louvian_community(g, data = attrData)
 print(Sys.time() - t1)
  
 # g <- as.undirected(g)

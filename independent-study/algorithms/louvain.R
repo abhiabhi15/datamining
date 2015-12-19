@@ -12,7 +12,7 @@ get_louvian_community <- function(g){
     cat("Iteration = ", iter, "\n")
     changes = 0
     org_mod = modularity(g, comm)
-    cat("Community Size =", length(unique(comm)))
+    cat("Community Size =", length(unique(comm)), "\n")
     for(i in 1:vcount(g)){
       nbs <- neighbors(g, i)
       if(length(nbs) > 0){
@@ -36,16 +36,17 @@ get_louvian_community <- function(g){
   return(comm)
 }
 
-#g = read.graph("../polblogs/data/polblogs.gml", format = "gml")
 
-# mat <- as.matrix(read.table("sample_graph1.txt", sep="\t", header=F))
-# g <- graph.adjacency(mat)
-
-cal <- read.csv("../facebook/data/Caltech36_adj.csv", header=F)
-mat1 <- data.matrix(cal,rownames.force=NA)
-g <- graph.adjacency(mat1)
-g <- as.undirected(g)
-
-comm <- get_louvian_community(g)
-print(comm)
-modularity(g, comm)
+# g = read.graph("../polblogs/data/polblogs.gml", format = "gml")
+# 
+# # mat <- as.matrix(read.table("sample_graph1.txt", sep="\t", header=F))
+# # g <- graph.adjacency(mat)
+# 
+# cal <- read.csv("../facebook/data/Caltech36_adj.csv", header=F)
+# mat1 <- data.matrix(cal,rownames.force=NA)
+# g <- graph.adjacency(mat1)
+# g <- as.undirected(g)
+# 
+# comm <- get_louvian_community(g)
+# print(comm)
+# modularity(g, comm)
