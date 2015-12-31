@@ -2,8 +2,7 @@
 #
 #  @author : abhishek
 #  @unityid : akagrawa
-#  
-#   Note : Please refer README.md file for the code usage
+#  Note : Please refer README.md file for the code usage
 
 # Loading the library file
 source("vproplib.R")
@@ -46,6 +45,7 @@ deltaSeq <- seq(8, 10, 0.1)
 for(delta in deltaSeq){
     es <- append(es, epidemicThr(g, beta1,delta))
 }
+
 # Plot of the above results
 xlab <- paste("Healing Probability(delta)" ,paste(paste( " [ Constant Beta = ", beta1), " ]"))
 plot(deltaSeq, es, pch = 20, col = "blue", xlab=xlab, ylab="Epidemic Threshold (s)", main="Epidemic Threshold Vs Healing Probability(SIS VPM)")
@@ -64,6 +64,7 @@ betaSeq <- seq(0.005, 0.05, 0.001)
 for(beta in betaSeq){
     es <- append(es, epidemicThr(g, beta,delta2))
 }
+
 # Plot of the above results
 xlab <- paste("Transmission Probability(beta)" ,paste(paste( " [ Constant Delta = ", delta2), " ]"))
 plot(betaSeq, es, pch = 20, col = "blue", xlab=xlab, ylab="Epidemic Threshold (s)", main="Epidemic Threshold Vs Transmission Probability(SIS VPM)")
@@ -77,6 +78,7 @@ deltaSeq <- seq(0.1, 1, 0.05)
 for(delta in deltaSeq){
    es <- append(es, epidemicThr(g, beta2, delta))
 }
+
 # Plot of the above results
 xlab <- paste("Healing Probability(delta)" ,paste(paste( " [ Constant Beta = ", beta2), " ]"))
 plot(deltaSeq, es, pch = 20, col = "blue", xlab=xlab, ylab="Epidemic Threshold (s)", main="Epidemic Threshold Vs Healing Probability(SIS VPM)")
@@ -155,7 +157,6 @@ spreadVirus(graph=pCgraph, beta=beta1, delta=delta1, simulations=10, iterations=
 # Running simulation for policy D immunized network
 pDgraph <- immunization(graph=g, policy="D", beta=beta1, delta=delta1, k=k1, only.graph=T)
 spreadVirus(graph=pDgraph, beta=beta1, delta=delta1, simulations=10, iterations=100)
-
 
 #########################################################
 #########################################################

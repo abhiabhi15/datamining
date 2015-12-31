@@ -74,8 +74,10 @@ names(attrData)
 t1 = Sys.time()
 comm = get_louvian_community(g, data = attrData)
 print(Sys.time() - t1)
- 
+table(comm) 
 # g <- as.undirected(g)
 # comm <- get_louvian_community(g)
 # print(comm)
 # modularity(g, comm)
+
+##
