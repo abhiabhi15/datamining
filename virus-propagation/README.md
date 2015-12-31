@@ -5,11 +5,11 @@
 
 Virus Propagation code is implemented for the following tasks:
 
-1. **Checking for epidemic threshold :** If epidemic threshold of a network(graph) is greater than 1, then epidemic will break out otherwise not.
-2. ** Simulation for virus spread  :**  For different transmission probability(beta) and different healing probability(delta), the simulation of virus spread over the contact network.
-3. **Immunization policy :** Given fixed number of vaccines, immunzing the network using different immunization policies and then checking for epidemic threshold mention in task1.
-4. ** Optimal Number of Vaccines : ** Estimating the minimum number of vaccines required for different immunization policies in order to stop/control virus propagation.
-5. ** Simulation of Virus Spread for Immunized Network : ** Running the task2 simulations over the immunized network obtained from task3.
+1. **Checking for epidemic threshold:** If epidemic threshold of a network(graph) is greater than 1, then epidemic will break out otherwise not.
+2. **Simulation for virus spread:**  For different transmission probability(beta) and different healing probability(delta), the simulation of virus spread over the contact network.
+3. **Immunization policy:** Given fixed number of vaccines, immunzing the network using different immunization policies and then checking for epidemic threshold mention in task1.
+4. **Optimal Number of Vaccines:** Estimating the minimum number of vaccines required for different immunization policies in order to stop/control virus propagation.
+5. **Simulation of Virus Spread for Immunized Network:** Running the task2 simulations over the immunized network obtained from task3.
  
 ----
 #####Code : `vprop.R` , `vproplib.R`
@@ -61,13 +61,13 @@ immunization(graph, policy=c("A","B","C","D"), beta, delta, k, only.graph=F)
 
     Here immunization policies are : 
     
-    **Policy A:** Select k random nodes for immunization 
+    Policy-A: Select k random nodes for immunization 
     
-    **Policy B:** Select the k nodes with highest degree for immunization
+    Policy-B: Select the k nodes with highest degree for immunization
 
-    **Policy C:** Select the node with the highest degree for immunization. Remove this node (and its incident edges) from the contact network. Repeat until all vaccines are administered.
+    Policy-C: Select the node with the highest degree for immunization. Remove this node (and its incident edges) from the contact network. Repeat until all vaccines are administered.
     
-    **Policy D ** Removal of k nodes corresponding k largest eigen vectors
+    Policy-D Removal of k nodes corresponding k largest eigen vectors
     
 5. Estimating optimal number of vaccines needed wrt to immunization policy. Output is the optimal Vaccine needed.
 ```
