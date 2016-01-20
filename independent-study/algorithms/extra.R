@@ -15,7 +15,7 @@ df$value = vertex_attr(g, "value")
 
 dfs <- df[-rmIndex,]
 write.csv(file="data/polblogs_small_attrlist.csv", dfss, row.names = F)
-write.csv(file="data/fb_caltech_org_attrlist.csv", d, row.names = F)
+
 
 ## Small Graphs
 comps <- decompose.graph(g)
@@ -63,5 +63,12 @@ for (i in 1:60){
 # Elbow Plot
 plot(1:60, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares", main="Kmeans Optimal Number of Clusters",col="blue")
 
+
+attrData <- read.csv("../facebook/data/Caltech36.csv")
+attrs <- c("year","dorm","gender","student_fac","major")
+attrData <- attrData[, attrs]
+attrData[,attrs] <- lapply(attrData[,attrs] , factor)
+d = model.matrix(~ . + 0, data=attrData, contrasts.arg = lapply(attrData, contrasts, contrasts=FALSE))
+write.csv(file="data/fb_caltech_org_attrlist.csv", d, row.names = F)
 
 

@@ -44,6 +44,7 @@ get_louvian_community <- function(g, data, alpha=0.5){
         delta.similarity = sapply(unique(comm[nbs]), sim.value , data, comm, i)
         delta = alpha * delta.modularity + ((1 - alpha) * delta.similarity)
         max <- max(delta)
+       # print(delta.similarity)
         if(!is.infinite(max) && max > 0){
           ucomm <- unique(comm[nbs])
           comm[i] <- ucomm[which.max(delta)]
@@ -65,7 +66,7 @@ get_louvian_community <- function(g, data, alpha=0.5){
 g <- read.graph(file="data/fb_caltech_small_edgelist.txt", format = c("edgelist"))
 
 attrData <- read.csv("data/fb_caltech_small_attrlist.csv")
-attrData <- attrData[,1:34]
+#attrData <- attrData[,1:34]
 names(attrData)
 t1 = Sys.time()
 comm = get_louvian_community(g, data = attrData)
