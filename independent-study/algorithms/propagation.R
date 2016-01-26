@@ -47,9 +47,9 @@ influence_propagation <- function(graph, comm, beta=0.75){
         candidates = intersect(candidates, nbs)
         ids <- c()
         for(j in candidates){
-          if(j %in% nbs && sample(1:100, 1) <= beta * 100){     # Stochastically determining if node will get infected, using beta transmission probability
-            ids <- append(ids, j)
-          }  
+            if(j %in% nbs && sample(1:100, 1) <= beta * 100){     # Stochastically determining if node will get infected, using beta transmission probability
+                ids <- append(ids, j)
+            }  
         }    
       }else{
         candidates = nodes[nodes$comm != nodes[i, c("comm")] & nodes$color == "green", c("Id")]
