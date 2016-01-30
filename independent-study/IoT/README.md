@@ -11,7 +11,7 @@ Internet of Things: Data and Other resources
 
 | Project Title     | Project URL  | Algorithm(s) |  Data | Paper & Other Resources |
 |:---------------:|:-----------:|:-------------:|:--------------:|:-------:|:-------------|
-| Geolife GPS Trajectories | [Geolife](http://research.microsoft.com/en-us/downloads/b16d359d-d164-469e-9fd4-daa38f2b2e13/)  |  | Available |  |  |    
-| T-drive | [Geolife](http://research.microsoft.com/en-us/downloads/b16d359d-d164-469e-9fd4-daa38f2b2e13/)  |  | Available |  |  |    
-| Urban Air| [Geolife](http://research.microsoft.com/en-us/downloads/b16d359d-d164-469e-9fd4-daa38f2b2e13/)  |  | Available |  |  |    
-| Forecasting Air Quality| [Geolife](http://research.microsoft.com/en-us/downloads/b16d359d-d164-469e-9fd4-daa38f2b2e13/)  |  | Available |  |  |    
+| Air Quality Inference Meets Big Data | [U-Air](http://research.microsoft.com/apps/pubs/?id=193973)  |  ANN, CRF| Available |  http://research.microsoft.com/pubs/193973/U-Air-KDD-camera-ready.pdf |    
+| Forecasting Air Quality | [Forescasting ](http://research.microsoft.com/apps/pubs/?id=246398)  |  Linear Regression, Neural Networks, Aggregators & predictors |Available | http://research.microsoft.com/pubs/246398/Forecasting%20air%20qualtiy-kdd2015-camera-ready.pdf |     
+| Taxi Recommendation| [Where to Find My Next Passenger](http://research.microsoft.com/apps/pubs/?id=151647) |Conditional Probability Distributions models | Data Simulator | (http://research.microsoft.com/pubs/151647/ubic388-yuan.pdf) |    
+| Geolife Trajectories| [Mining interesting locations and travel sequences from GPS trajectories.](http://research.microsoft.com/apps/pubs/?id=79440)  |  Available |  |  | http://research.microsoft.com/pubs/79440/fp120-zheng.pdf   
