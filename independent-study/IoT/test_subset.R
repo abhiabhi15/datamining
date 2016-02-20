@@ -9,9 +9,9 @@ timesteps = 10
 
 for(i in 274:284){
   tdata <- fdata[yday(fdata$time) == i,]
-  tdata <- tdata[1:15,]
+  tdata <- tdata[1:30,]
   tdata$label <- "unknown"
-  tdata[1:10, c("label")] <- "known"
+  tdata[1:20, c("label")] <- "known"
   filename <- paste("test/winter_beijing_T", i, sep="")
   write.csv(file=paste(filename, "csv", sep="."), tdata, row.names = F)  
 }

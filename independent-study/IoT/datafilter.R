@@ -88,6 +88,13 @@ bairDataNew$duid = paste(bairDataNew$district_id , yday(bairDataNew$time) , sep=
 write.csv(file="winter_beijing_filter_V1.csv", bairDataNew, row.names = F)
 
 
+## Function to calculate AQI
+aqiCalc <- function(df){
+  dm <- as.matrix(df)
+  class(dm) <- "numeric"
+  apply(dm, 1, max, na.rm=T)
+}
+
 ## merging polution data with meteorology data
 fdata <- merge(bairDataNew, mbairDataNew, by.x="duid", by.y = "uid")
 names(fdata)
@@ -96,6 +103,7 @@ colnames(fdata)[2] = "time"
 colnames(fdata)[9] = "id"
 fdata <- fdata[c(9, 2, 1, 12, 10, 11, 3,4,5,6,7,8,13,14,15,16,17,18)]
 fdata = fdata[with(fdata, order(id)), ]
+fdata$aqi = aqiCalc(fdata[,7:12])
 
 write.csv(file="winter_beijing_full.csv", fdata, row.names = F)
 
@@ -106,7 +114,6 @@ for(i in yday(fdata$time)){
     filename <- paste("time/winter_beijing_T", i, sep="")
     write.csv(file=paste(filename, "csv", sep="."), tdata, row.names = F)  
 }
-
 
 ## AQI Distribution
 rm(list=ls())

@@ -5,18 +5,24 @@ import pandas as pd
 import math
 import statsmodels.formula.api as sm
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler, Imputer
-from numpy.linalg import inv
+from scipy.spatial import distance
+from sklearn.preprocessing import MinMaxScaler
+import numpy.linalg as la
+import aqi_index as aq
 
-feature_list = ["PM25_Concentration", "PM10_Concentration", "NO2_Concentration", "CO_Concentration", "O3_Concentration",
-               "SO2_Concentration", "weather", "temperature", "pressure", "humidity", "wind_speed", "wind_direction"]
+#feature_list = ["temperature", "humidity", "wind_speed"]
+feature_list = ["weather", "temperature", "pressure", "humidity", "wind_speed", "wind_direction"]
+aqi_list = ["PM25_Concentration", "PM10_Concentration", "NO2_Concentration", "CO_Concentration", "O3_Concentration",
+               "SO2_Concentration"]
 info_list = ["id", "label", "time", "station_id", "latitude", "longitude", "aqi"]
 
 v_list, u_list = [], []  # Storing Nodes (Labeled = v_list, Unlabeled = u_list)
 weight_list, edge_feature_DF, feature_params = None, None, None
-MIN_DIST = 0.20
+MIN_DIST = 0.5
 LABEL_KNOWN = "known"
 LABEL_UNKNOWN = "unknown"
+AQI_POLLUTANTS = "aqi_pollutants"
+FEATURES = "features"
 
 def get_labeled_node_edges():
     edges = []
@@ -42,23 +48,23 @@ def get_neighbor_node_edges(G):
     return edges
 
 def add_graph_edges(G):
-    # Adding edges from Labeled to unlabeled nodes
-    G.add_weighted_edges_from(get_labeled_node_edges())
 
-    #Adding Neighbourhood Edges
-    G.add_weighted_edges_from(get_neighbor_node_edges(G))
-
-    #TODO: Add Next Time Layer Nodes Edges
+    G.add_weighted_edges_from(get_labeled_node_edges()) # Adding edges from Labeled to unlabeled nodes
+    G.add_weighted_edges_from(get_neighbor_node_edges(G)) #Adding Neighbourhood Edges
 
 def extract_properties(r):
     dict = r.to_dict()
-    props, fdict = {}, {}
+    props, fdict, aqi_dict = {}, {}, {}
     for key, value in dict.iteritems():
         if key in feature_list:
             fdict[key] = value
         elif key in info_list:
             props[key] = value
-    props["features"] = fdict
+        elif key in aqi_list:
+            aqi_dict[key] = value
+
+    props[AQI_POLLUTANTS] = aqi_dict
+    props[FEATURES] = fdict
     return props
 
 def create_graph(df):
@@ -76,29 +82,31 @@ def create_graph(df):
     return G
 
 def create_edge_feature_DF(G):
-    ids, fname, fdiff, aqidiff ,labels = [], [], [], [], []
+    ids, fname, fdiff, aqi_sim ,labels = [], [], [], [], []
     for k,v in G.edges_iter():
         for feature in feature_list:
             ids.append(k + "_" + v)
             fname.append(feature)
-            fdiff.append(G.node[k]["features"][feature] - G.node[v]["features"][feature])
-            aqidiff.append(G.node[k]["aqi"] - G.node[v]["aqi"])
+            fdiff.append(abs(G.node[k][FEATURES][feature] - G.node[v][FEATURES][feature]))
+            dist = distance.euclidean(G.node[k][AQI_POLLUTANTS].values(), G.node[v][AQI_POLLUTANTS].values())
+            aqi_sim.append(1/dist)
             if G.node[k]["label"] == LABEL_KNOWN and G.node[k]["label"] == LABEL_KNOWN:
                 labels.append(LABEL_KNOWN)
             else:
                 labels.append(LABEL_UNKNOWN)
 
-    d = {"id": ids, "fname": fname, "feature_diff": fdiff, "aqi_diff": aqidiff, "label": labels}
-    return pd.DataFrame(d, columns=["id", "fname", "feature_diff", "aqi_diff", "label"])
+    d = {"id": ids, "fname": fname, "feature_diff": fdiff, "aqi_sim": aqi_sim, "label": labels}
+    return pd.DataFrame(d, columns=["id", "fname", "feature_diff", "aqi_sim", "label"])
 
 def learn_feature_params(feature_DF):
+
     feature_params = {}
     for feature in feature_list:
         fDF = feature_DF.loc[(feature_DF['fname'] == feature) & (feature_DF['label'] == LABEL_KNOWN)].dropna()
         if fDF.empty:
             result.params = [0, 0]
         else:
-            result = sm.ols(formula="aqi_diff ~ feature_diff", data=fDF).fit()
+            result = sm.ols(formula="aqi_sim ~ feature_diff", data=fDF).fit()
         feature_params[feature] = {"a": result.params[1], "b": result.params[0]}
     return feature_params
 
@@ -133,6 +141,9 @@ def preprocess_DF(df):
     df.replace('NULL', np.nan)
     df = df.fillna(df.mean())
     df[feature_list] = df[feature_list].apply(lambda x: MinMaxScaler().fit_transform(x))
+    for pollutant in aq.pollutants:
+        df[pollutant] =  df[pollutant].apply(lambda x: aq.get_aqi_value(x, pollutant))
+
     df[["aqi"]] = df[["aqi"]].apply(lambda x: MinMaxScaler().fit_transform(x))
     return df
 
@@ -182,19 +193,27 @@ def get_unlabeled_nodes_aqi_distribution(G):
     diag_matrix = np.diag(np.array(diag_list))
 
     # Calculating Pv
-    pv_list = []
+    pv_matrix = None
     for vnode in v_list:
-        pv_list.append(G.node[vnode]['aqi'])
-    pv_matrix = np.array(pv_list).reshape((len(v_list), 1))
+        pv_list = []
+        for k, v in G.node[vnode][AQI_POLLUTANTS].iteritems():
+            pv_list.append(v)
+
+        p_arr = np.array(pv_list).reshape(1, len(aqi_list))
+        if pv_matrix is None:
+            pv_matrix = p_arr
+        else:
+            pv_matrix = np.concatenate((pv_matrix, p_arr), axis=0)
 
     print "Diagonal Matrix\n", diag_matrix, "\n ======================= \n"
     print "Weight Matrix U\n", weight_matrix_u, "\n ======================= \n"
     ## Compute Pu
     print "Subtract Matrix U\n", np.subtract(diag_matrix, weight_matrix_u), " \n =============== \n"
-    uinv = inv(np.subtract(diag_matrix, weight_matrix_u))
+    uinv = la.inv(np.subtract(diag_matrix, weight_matrix_u))
     print "Inverse Matrix U\n", uinv, " \n======================= \n"
     pp = np.dot(uinv, weight_matrix_uv)
     print "PP Matrix \n", pp, " \n======================= \n"
+    print "Pv Matrix \n", pv_matrix, " \n======================= \n"
     pu = np.dot(pp, pv_matrix)
     print(pu)
 
@@ -203,13 +222,44 @@ def calculate_entropy(p_u):
     pass
 
 
+def calc_aqi_distribution(G):
+
+    pu_matrix = None
+    for unode in u_list:
+        p_arr = None
+        for vnode in v_list:
+
+            if G.has_edge(unode, vnode):
+                pv_list = []
+
+                wt = G[unode][vnode]['weight']
+                for k,v in G.node[vnode][AQI_POLLUTANTS].iteritems():
+                    pv_list.append(wt * v)
+
+                p_temp = np.array(pv_list).reshape(1, len(aqi_list))
+
+                if p_arr is None:
+                    p_arr = p_temp
+                else:
+                    p_arr = p_arr + p_temp
+
+        p_arr = p_arr/G.degree(unode)
+        if pu_matrix is None:
+            pu_matrix = p_arr
+        else:
+            pu_matrix = np.concatenate((pu_matrix, p_arr), axis=0)
+    print(pu_matrix)
+
+
 def aqi_inference(df):
+    aq.init_aqi_index()
     df = preprocess_DF(df)
     G = create_graph(df)
     init_feature_weights()
     init_edge_weights(G)
-    p_u = get_unlabeled_nodes_aqi_distribution(G)
-    h_p_u = calculate_entropy(p_u)
+    p_u = calc_aqi_distribution(G)
+    #p_u = get_unlabeled_nodes_aqi_distribution(G)
+    #h_p_u = calculate_entropy(p_u)
 
     G.clear()
 
