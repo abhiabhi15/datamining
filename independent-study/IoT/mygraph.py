@@ -7,8 +7,9 @@ import statsmodels.formula.api as sm
 import numpy as np
 from scipy.spatial import distance
 from sklearn.preprocessing import MinMaxScaler
-import numpy.linalg as la
+from sklearn.metrics import mean_squared_error
 import aqi_index as aq
+import matplotlib.pyplot as plt
 
 #feature_list = ["temperature", "humidity", "wind_speed"]
 feature_list = ["weather", "temperature", "pressure", "humidity", "wind_speed", "wind_direction"]
@@ -17,8 +18,8 @@ aqi_list = ["PM25_Concentration", "PM10_Concentration", "NO2_Concentration", "CO
 info_list = ["id", "label", "time", "station_id", "latitude", "longitude", "aqi"]
 
 v_list, u_list = [], []  # Storing Nodes (Labeled = v_list, Unlabeled = u_list)
-weight_list, edge_feature_DF, feature_params = None, None, None
-MIN_DIST = 0.5
+edge_feature_DF, feature_params = None, None
+MIN_DIST = 0.35
 LABEL_KNOWN = "known"
 LABEL_UNKNOWN = "unknown"
 AQI_POLLUTANTS = "aqi_pollutants"
@@ -48,7 +49,6 @@ def get_neighbor_node_edges(G):
     return edges
 
 def add_graph_edges(G):
-
     G.add_weighted_edges_from(get_labeled_node_edges()) # Adding edges from Labeled to unlabeled nodes
     G.add_weighted_edges_from(get_neighbor_node_edges(G)) #Adding Neighbourhood Edges
 
@@ -103,6 +103,8 @@ def learn_feature_params(feature_DF):
     feature_params = {}
     for feature in feature_list:
         fDF = feature_DF.loc[(feature_DF['fname'] == feature) & (feature_DF['label'] == LABEL_KNOWN)].dropna()
+        # plt.scatter(fDF["feature_diff"], fDF["aqi_sim"])
+        # plt.show()
         if fDF.empty:
             result.params = [0, 0]
         else:
@@ -126,15 +128,8 @@ def init_edge_weights(G):
             fdiff = node_features.loc[node_features["fname"] == feature]["feature_diff"].iat[0, 0]
             if not(math.isnan(fdiff)):
                 AFk = ((feature_params[feature]["a"] * fdiff) + feature_params[feature]["b"]) * fdiff
-                summation += math.pow(weight_list[feature], 2) * AFk
+                summation += AFk
         G.edge[k][v]['weight'] = math.exp(-summation)
-
-
-def init_feature_weights():
-    global weight_list
-    weight_list = {}
-    for feature in feature_list:
-        weight_list[feature] = 1
 
 
 def preprocess_DF(df):
@@ -147,84 +142,9 @@ def preprocess_DF(df):
     df[["aqi"]] = df[["aqi"]].apply(lambda x: MinMaxScaler().fit_transform(x))
     return df
 
-
-def get_unlabeled_nodes_aqi_distribution(G):
-    diag_list = []
-    weight_matrix_u = None
-    weight_matrix_uv = None
-
-    for unode in u_list:
-
-        # Calculating D(u,u)
-        w_sum = 0
-        for tuple in G.edges(unode, data='weight'):
-            if tuple[1] in u_list:
-                w_sum += tuple[2]
-        diag_list.append(w_sum)
-
-        # Calculating W(u,u)
-        w_list = []
-        for other_unode in u_list:
-            if G.has_edge(unode, other_unode):
-                w_list.append(G[unode][other_unode]['weight'])
-            else:
-                w_list.append(0)
-
-        w_arr = np.array(w_list).reshape(1, len(u_list))
-        if weight_matrix_u is None:
-            weight_matrix_u = w_arr
-        else:
-            weight_matrix_u = np.concatenate((weight_matrix_u, w_arr), axis=0)
-
-        # Calculating W(u,v)
-        w_list = []
-        for vnode in v_list:
-            if G.has_edge(unode, vnode):
-                w_list.append(G[unode][vnode]['weight'])
-            else:
-                w_list.append(0)
-
-        w_arr = np.array(w_list).reshape(1, len(v_list))
-        if weight_matrix_uv is None:
-            weight_matrix_uv = w_arr
-        else:
-            weight_matrix_uv = np.concatenate((weight_matrix_uv, w_arr), axis=0)
-
-    diag_matrix = np.diag(np.array(diag_list))
-
-    # Calculating Pv
-    pv_matrix = None
-    for vnode in v_list:
-        pv_list = []
-        for k, v in G.node[vnode][AQI_POLLUTANTS].iteritems():
-            pv_list.append(v)
-
-        p_arr = np.array(pv_list).reshape(1, len(aqi_list))
-        if pv_matrix is None:
-            pv_matrix = p_arr
-        else:
-            pv_matrix = np.concatenate((pv_matrix, p_arr), axis=0)
-
-    print "Diagonal Matrix\n", diag_matrix, "\n ======================= \n"
-    print "Weight Matrix U\n", weight_matrix_u, "\n ======================= \n"
-    ## Compute Pu
-    print "Subtract Matrix U\n", np.subtract(diag_matrix, weight_matrix_u), " \n =============== \n"
-    uinv = la.inv(np.subtract(diag_matrix, weight_matrix_u))
-    print "Inverse Matrix U\n", uinv, " \n======================= \n"
-    pp = np.dot(uinv, weight_matrix_uv)
-    print "PP Matrix \n", pp, " \n======================= \n"
-    print "Pv Matrix \n", pv_matrix, " \n======================= \n"
-    pu = np.dot(pp, pv_matrix)
-    print(pu)
-
-
-def calculate_entropy(p_u):
-    pass
-
-
 def calc_aqi_distribution(G):
 
-    pu_matrix = None
+    pu_list = []
     for unode in u_list:
         p_arr = None
         for vnode in v_list:
@@ -244,23 +164,33 @@ def calc_aqi_distribution(G):
                     p_arr = p_arr + p_temp
 
         p_arr = p_arr/G.degree(unode)
-        if pu_matrix is None:
-            pu_matrix = p_arr
-        else:
-            pu_matrix = np.concatenate((pu_matrix, p_arr), axis=0)
-    print(pu_matrix)
+        pu_list.append(p_arr.tolist())
+
+    flattened = [val for sublist in pu_list for val in sublist]
+    return [val for sublist in flattened for val in sublist]
+
+
+def compute_rmse(predicted_list, G):
+    actual_vals = []
+    for unode in u_list:
+        actual_vals.append(G.node[unode][AQI_POLLUTANTS].values())
+
+    actual_list = [val for sublist in actual_vals for val in sublist]
+    print "Actual List = ", actual_list
+    print "Predicted List = ", predicted_list
+    rms = math.sqrt(mean_squared_error(actual_list, predicted_list))
+    print "RMSE = " , rms
 
 
 def aqi_inference(df):
     aq.init_aqi_index()
     df = preprocess_DF(df)
     G = create_graph(df)
-    init_feature_weights()
     init_edge_weights(G)
-    p_u = calc_aqi_distribution(G)
-    #p_u = get_unlabeled_nodes_aqi_distribution(G)
-    #h_p_u = calculate_entropy(p_u)
-
+    predicted_list = calc_aqi_distribution(G)
+    compute_rmse(predicted_list, G)
+    print "Number of edges = ",  G.number_of_edges()
+    print "Number of nodes = ",  G.number_of_nodes()
     G.clear()
 
 
