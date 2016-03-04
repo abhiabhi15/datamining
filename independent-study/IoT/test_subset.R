@@ -1,5 +1,6 @@
 rm(list=ls())
 
+
 fdata = read.csv("winter_beijing_full.csv")
 bstation = read.csv("data/beijing_station.csv")
 distdata <- read.csv("winter_beijing_aqi_distribution.csv")
@@ -7,9 +8,9 @@ distdata <- read.csv("winter_beijing_aqi_distribution.csv")
 timesteps = 10  
 # labeled stations = 10 , unlabeled = 10
 
-for(i in 274:284){
+for(i in 274:280){
   tdata <- fdata[yday(fdata$time) == i,]
-  tdata <- tdata[1:30,]
+  tdata <- tdata[1:25,]
   tdata$label <- "unknown"
   tdata[1:20, c("label")] <- "known"
   filename <- paste("test/winter_beijing_T", i, sep="")
